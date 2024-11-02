@@ -245,6 +245,7 @@ Now that you have created the R Markdown document, you might want to start commi
 + Click the Pull button to fetch any remote changes(perhaps others working on the code).
 + Click the Push button to push your changes to the remote repository.
 + On GitHub, navigate to the Code tab of the repository to see the changes.
+#test_4j
 
 As you progress with your project, you can commit your changes periodically to maintain a clear version history. This practice ensures that you can easily track and revert to previous states of your project if needed. Additionally, for added convenience, you can clone your project's code onto other machines. This allows you to seamlessly continue your coding work across different environments, such as your UMICH workstation and personal machines, without any disruptions or discrepancies.
 
