@@ -9,35 +9,65 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r}
+## Question 2
 
+**For my analysis, I used the `World` dataset from the `tmap` package in R. I was interested**
+**in analysing and visualizing how life expectency is influenced by inequality across countries.**
+**First I removed NA's from the dataset and plotted the data for 136 countries.**
+
+
+```{r, message=FALSE, warning=FALSE, echo = FALSE}
 library(ggplot2)
 library(sf)
 library(tidyverse)
 library(ggspatial)
 library(tmap)
-library('viridis')
-
-plot.new()
-ggplot() +
-  geom_sf(data = World, aes(
-  fill = life_exp), alpha = .5) + 
-  ggtitle("Life Expectancy by Country") + 
-  labs(caption = "Created by Jeffrey Ferrer 11/1/2024") +
-  scale_fill_gradientn(colours = heat.colors(10), name = "Age") +  #I used standard hear map colors - gray values are missing
-  theme_bw() + theme(plot.title = element_text(hjust = .5)) + 
-  annotation_north_arrow(height = unit(1, "cm"), width = unit(1,"cm"), pad_y = unit(1.75, "cm"))
 ```
-```{r}
+
+
+```{r, echo = TRUE}
 World_subset <- na.omit(World)
 inequality <- World_subset$inequality
 life_exp <- World_subset$life_exp
 {plot(x = inequality, y = life_exp, las = 1, col = 'blue', pch = 19,
   xlab = "Inequality", ylab = "Life Expectancty", main = "Life Expectancy
-  as a Function of Inequality")
+  as a Function of Inequality for 136 Countries")
 abline(lm(life_exp ~ inequality))}
 ```
-```{r}
+
+**There seems to be a linear relationship between these two variables so**
+**I conducted a simple linear regression to analyze the data.**
+
+```{r, echo = FALSE}
 summary(lm(life_exp ~ inequality))
 ```
 
+**From the summary statistic we can see that there is a significant relationship**
+**between inequality and life expectancy. More specifically, a 1 unit increase**
+**in inequality (presumably the units are based on Gini index, a popular statistical measurement** **of income, wealth, or consumption inequality within a group or country) is associated with**
+**a 67 year decrease in life expectancy. Since the Gini index ranges from 0-1, it would**
+**be more appropriate to say that a .1 increase in equality is significantly associated**
+**with a 6.7 year decrease in life expectancy**
+
+**Now that we know life expectancy is significantly associated with inequality**
+**I would like to visualize how variation inlife expectancy is spatially distributed throughout**
+**the globe. To do this, I used ``ggplot2`` using the ``heat.colors()`` pallette.**
+
+
+```{r}
+ggplot() +
+  geom_sf(data = World, aes(
+  fill = life_exp), alpha = .5) + 
+  ggtitle("Life Expectancy by Country") + 
+  labs(caption = "Created by Jeffrey Ferrer 11/1/2024") +
+  scale_fill_gradientn(colours = heat.colors(10), name = "Age") +  
+  theme_bw() + theme(plot.title = element_text(hjust = .5)) + 
+  annotation_north_arrow(height = unit(1, "cm"), width = unit(1,"cm"), pad_y = unit(1.75, "cm"))
+```
+
+**By looking at the map, we can easily see that that life expectancy is lowest in third**
+**world countries. Since life expectancy is significantly associated with inequality, we know** 
+**that these countries also have a high degree of inequality. By combining graphs, statiscal** **analysis, and maps, I was able to create a thorough and informative analysis of life expectancy** **and inequality.**
+
+
+![Alt text](C:\Users\jeffr\OneDrive\Documents\Fall 2024\Advanced_Geovisual\Week_1\GeovisLab1\adv_geovis_lab_01\git_commits.png)
