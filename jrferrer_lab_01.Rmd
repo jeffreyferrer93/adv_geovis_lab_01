@@ -1,0 +1,31 @@
+---
+title: "jrferrer_lab_01"
+author: "Jeffrey Ferrer"
+date: "2024-11-03"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+
+library(ggplot2)
+library(sf)
+library(tidyverse)
+library(ggspatial)
+library(tmap)
+library('viridis')
+
+plot.new()
+ggplot() +
+  geom_sf(data = World, aes(
+  fill = life_exp), alpha = .5) + 
+  ggtitle("Life Expectancy by Country") + 
+  labs(caption = "Created by Jeffrey Ferrer 11/1/2024") +
+  scale_fill_gradientn(colours = heat.colors(10), name = "Age") +  #I used standard hear map colors - gray values are missing
+  theme_bw() + theme(plot.title = element_text(hjust = .5)) + 
+  annotation_north_arrow(height = unit(1, "cm"), width = unit(1,"cm"), pad_y = unit(1.75, "cm"))
+```
+
