@@ -28,4 +28,16 @@ ggplot() +
   theme_bw() + theme(plot.title = element_text(hjust = .5)) + 
   annotation_north_arrow(height = unit(1, "cm"), width = unit(1,"cm"), pad_y = unit(1.75, "cm"))
 ```
+```{r}
+World_subset <- na.omit(World)
+inequality <- World_subset$inequality
+life_exp <- World_subset$life_exp
+{plot(x = inequality, y = life_exp, las = 1, col = 'blue', pch = 19,
+  xlab = "Inequality", ylab = "Life Expectancty", main = "Life Expectancy
+  as a Function of Inequality")
+abline(lm(life_exp ~ inequality))}
+```
+```{r}
+summary(lm(life_exp ~ inequality))
+```
 
